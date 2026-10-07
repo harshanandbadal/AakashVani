@@ -960,6 +960,40 @@ function setupHeaderActions() {
 }
 
 // =============================================================================
+// Mobile Auto-Fit Column Switcher Controls
+// =============================================================================
+function setupMobileColumnSwitcher() {
+  const switcher = document.getElementById('mobileColumnSwitcher');
+  const dashboardCoreGrid = document.getElementById('dashboardCoreGrid');
+  if (!switcher || !dashboardCoreGrid) return;
+
+  const buttons = switcher.querySelectorAll('.switcher-pill');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view; // 'all', 'center', 'left', 'right'
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      dashboardCoreGrid.dataset.mobileView = view;
+    });
+  });
+
+  // When on mobile in 'cities' view, selecting a city smoothly focuses weather card
+  const quickCards = document.querySelectorAll('.quick-city-card');
+  quickCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (window.innerWidth <= 860 && dashboardCoreGrid.dataset.mobileView === 'left') {
+        const weatherBtn = document.getElementById('switchViewWeather');
+        if (weatherBtn) {
+          buttons.forEach(b => b.classList.remove('active'));
+          weatherBtn.classList.add('active');
+          dashboardCoreGrid.dataset.mobileView = 'center';
+        }
+      }
+    });
+  });
+}
+
+// =============================================================================
 // Initialization
 // =============================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -975,7 +1009,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setupBottomNavigation();
   setupModalClosers();
   setupHeaderActions();
+  setupMobileColumnSwitcher();
 
   // Initial render: Hyderabad (matches screenshot 32° Clear Sky)
   renderCityWeather(state.activeCity);
 });
+

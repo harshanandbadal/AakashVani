@@ -137,8 +137,24 @@
           </div>
         </section>
 
+        <!-- Mobile Auto-Fit Column Switcher (Visible on Mobile, Hidden on Desktop) -->
+        <div class="mobile-column-switcher" id="mobileColumnSwitcher">
+          <button class="switcher-pill active" data-view="all" id="switchViewAll" title="Auto-fit all 3 columns">
+            <span>🔲</span> All 3
+          </button>
+          <button class="switcher-pill" data-view="center" id="switchViewWeather" title="Main Current Location Weather Card">
+            <span>☀️</span> Weather
+          </button>
+          <button class="switcher-pill" data-view="left" id="switchViewCities" title="Quick Monitored Cities">
+            <span>🏙️</span> Cities
+          </button>
+          <button class="switcher-pill" data-view="right" id="switchViewMetrics" title="Live Meteorological Parameters & 24h Ribbon">
+            <span>📊</span> Station & 24h
+          </button>
+        </div>
+
         <!-- Core Dashboard Grid (Auto-fits without scrolling) -->
-        <section class="dashboard-core-grid">
+        <section class="dashboard-core-grid" id="dashboardCoreGrid" data-mobile-view="all">
 
           <!-- Left Column: Quick Monitored Cities -->
           <div class="quick-cities-panel">
