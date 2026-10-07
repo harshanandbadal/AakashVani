@@ -34,116 +34,96 @@
       <button class="action-btn" id="unitToggleBtn" title="Toggle temperature unit">
         <span id="unitDisplay">°C</span>
       </button>
-
-      <!-- Mode switcher (Phone Mockup vs Full Dashboard) -->
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="modePhoneBtn" title="Showcase as held phone mockup (Exact screenshot)">📱 Phone View</button>
-        <button class="mode-btn" id="modeExpandedBtn" title="Expand to full-width web dashboard">🖥️ Expanded View</button>
-      </div>
     </div>
   </header>
 
-  <!-- Main Showcase Container -->
-  <main class="app-container" id="appMainContainer">
-    <div class="phone-mockup-wrapper">
-      
-      <!-- Handheld Smartphone Mockup Frame -->
-      <div class="smartphone-frame" id="smartphoneFrame">
-        <!-- Physical Speaker Grill & Front Camera Punch Hole -->
-        <div class="phone-speaker"></div>
-        <div class="phone-camera-hole"></div>
+  <!-- Main Full-Screen Auto-Fit Dashboard Container -->
+  <main class="dashboard-container" id="appMainContainer">
+    <!-- Atmospheric Sky Surface filling the entire viewport -->
+    <div class="screen-surface" id="screenSurface">
 
-        <!-- Inner OLED Screen Surface -->
-        <div class="screen-surface" id="screenSurface">
+      <!-- Background Decorative Floating Clouds Layer -->
+      <div class="cloud-layer" aria-hidden="true">
+        <!-- Cloud 1 -->
+        <svg class="cloud-svg-bg cloud-1" viewBox="0 0 100 60" fill="#ffffff">
+          <path d="M 20,45 A 15,15 0 0,1 35,25 A 25,25 0 0,1 70,25 A 15,15 0 0,1 85,45 Z" />
+        </svg>
+        <!-- Cloud 2 -->
+        <svg class="cloud-svg-bg cloud-2" viewBox="0 0 120 70" fill="#ffffff">
+          <path d="M 25,50 A 20,20 0 0,1 45,28 A 30,30 0 0,1 85,28 A 20,20 0 0,1 105,50 Z" />
+        </svg>
+        <!-- Cloud 3 -->
+        <svg class="cloud-svg-bg cloud-3" viewBox="0 0 90 55" fill="#ffffff">
+          <path d="M 15,40 A 12,12 0 0,1 28,20 A 22,22 0 0,1 62,20 A 15,15 0 0,1 78,40 Z" />
+        </svg>
+      </div>
 
-          <!-- Background Decorative Floating Clouds Layer -->
-          <div class="cloud-layer" aria-hidden="true">
-            <!-- Cloud 1 -->
-            <svg class="cloud-svg-bg cloud-1" viewBox="0 0 100 60" fill="#ffffff">
-              <path d="M 20,45 A 15,15 0 0,1 35,25 A 25,25 0 0,1 70,25 A 15,15 0 0,1 85,45 Z" />
-            </svg>
-            <!-- Cloud 2 -->
-            <svg class="cloud-svg-bg cloud-2" viewBox="0 0 120 70" fill="#ffffff">
-              <path d="M 25,50 A 20,20 0 0,1 45,28 A 30,30 0 0,1 85,28 A 20,20 0 0,1 105,50 Z" />
-            </svg>
-            <!-- Cloud 3 -->
-            <svg class="cloud-svg-bg cloud-3" viewBox="0 0 90 55" fill="#ffffff">
-              <path d="M 15,40 A 12,12 0 0,1 28,20 A 22,22 0 0,1 62,20 A 15,15 0 0,1 78,40 Z" />
-            </svg>
-          </div>
+      <!-- Main Auto-Fit Dashboard Content (Zero Scroll Layout) -->
+      <div class="dashboard-layout" id="dashboardLayout">
 
-          <!-- Phone Status Bar (Exact screenshot: 9:41, Cellular, Wifi, Battery) -->
-          <div class="status-bar" id="statusBar">
-            <span class="status-time" id="currentTimeDisplay">9:41</span>
-            <div class="status-icons">
-              <!-- Cellular signal icon -->
-              <svg viewBox="0 0 24 24"><path d="M2 20h2v-4H2v4zm4 0h2v-8H6v8zm4 0h2V8h-2v12zm4 0h2V4h-2v16z"/></svg>
-              <!-- Wifi icon -->
-              <svg viewBox="0 0 24 24"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.74 0 7.15 1.48 9.68 3.89L12 19.34 2.32 11.39C4.85 8.98 8.26 7.5 12 7.5z"/></svg>
-              <!-- Battery icon -->
-              <svg viewBox="0 0 24 24"><path d="M16 4h-2V2h-4v2H8C6.9 4 6 4.9 6 6v14c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H8V6h8v14z"/></svg>
+        <!-- Top Section: Brand Header & Search Bar -->
+        <section class="dashboard-top-section">
+          <!-- Brand Header -->
+          <div class="weather-brand-header">
+            <div class="brand-cloud-emblem">
+              <svg viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 52H78C87.9411 52 96 43.9411 96 34C96 24.3644 88.4239 16.5002 78.9037 16.0354C75.8239 7.03713 67.3115 0.5 57.2 0.5C45.3409 0.5 35.5348 9.0763 33.5684 20.4079C31.5478 19.4975 29.3093 19 26.95 19C16.4842 19 8 27.4842 8 37.95C8 45.7107 14.2893 52 22.05 52H30Z" fill="url(#cloudGrad)"/>
+                <path d="M30 52H78C87.9411 52 96 43.9411 96 34C96 24.3644 88.4239 16.5002 78.9037 16.0354C75.8239 7.03713 67.3115 0.5 57.2 0.5C45.3409 0.5 35.5348 9.0763 33.5684 20.4079C31.5478 19.4975 29.3093 19 26.95 19C16.4842 19 8 27.4842 8 37.95C8 45.7107 14.2893 52 22.05 52H30Z" fill="url(#cloudHighlight)" opacity="0.4"/>
+                <defs>
+                  <linearGradient id="cloudGrad" x1="52" y1="0.5" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FFFFFF"/>
+                    <stop offset="0.75" stop-color="#F1F5F9"/>
+                    <stop offset="1" stop-color="#E2E8F0"/>
+                  </linearGradient>
+                  <linearGradient id="cloudHighlight" x1="20" y1="5" x2="80" y2="40" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FFFFFF"/>
+                    <stop offset="1" stop-color="transparent"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div>
+              <h2 class="brand-app-title">AakashVani</h2>
+              <p class="brand-app-subtitle">City-Wise Weather Reporting System</p>
             </div>
           </div>
 
-          <!-- Main Scrollable Phone Content Viewport -->
-          <div class="phone-viewport-content" id="phoneViewport">
+          <!-- Search Bar: Pill Input with Autocomplete Dropdown -->
+          <div class="search-container">
+            <div class="search-pill">
+              <span class="search-icon">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </span>
+              <input 
+                type="text" 
+                class="search-input" 
+                id="citySearchInput" 
+                placeholder="Search City (e.g. Hyderabad, Varanasi, Mumbai, Delhi)..." 
+                autocomplete="off" 
+                spellcheck="false"
+              >
+              <button class="search-clear-btn" id="searchClearBtn" title="Clear input">✕</button>
+            </div>
 
-            <!-- Brand Header: Cloud Emblem + AakashVani Title + Subtitle -->
-            <section class="weather-brand-header">
-              <div class="brand-cloud-emblem">
-                <!-- Stylized Fluffy 3D Cloud SVG matching the screenshot -->
-                <svg viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M30 52H78C87.9411 52 96 43.9411 96 34C96 24.3644 88.4239 16.5002 78.9037 16.0354C75.8239 7.03713 67.3115 0.5 57.2 0.5C45.3409 0.5 35.5348 9.0763 33.5684 20.4079C31.5478 19.4975 29.3093 19 26.95 19C16.4842 19 8 27.4842 8 37.95C8 45.7107 14.2893 52 22.05 52H30Z" fill="url(#cloudGrad)"/>
-                  <path d="M30 52H78C87.9411 52 96 43.9411 96 34C96 24.3644 88.4239 16.5002 78.9037 16.0354C75.8239 7.03713 67.3115 0.5 57.2 0.5C45.3409 0.5 35.5348 9.0763 33.5684 20.4079C31.5478 19.4975 29.3093 19 26.95 19C16.4842 19 8 27.4842 8 37.95C8 45.7107 14.2893 52 22.05 52H30Z" fill="url(#cloudHighlight)" opacity="0.4"/>
-                  <defs>
-                    <linearGradient id="cloudGrad" x1="52" y1="0.5" x2="52" y2="52" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FFFFFF"/>
-                      <stop offset="0.75" stop-color="#F1F5F9"/>
-                      <stop offset="1" stop-color="#E2E8F0"/>
-                    </linearGradient>
-                    <linearGradient id="cloudHighlight" x1="20" y1="5" x2="80" y2="40" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#FFFFFF"/>
-                      <stop offset="1" stop-color="transparent"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <h2 class="brand-app-title">AakashVani</h2>
-              <p class="brand-app-subtitle">City-Wise Weather Reporting System</p>
-            </section>
+            <!-- Instant City Suggestions Dropdown -->
+            <div class="search-dropdown" id="searchDropdown">
+              <div class="dropdown-section-title">Major Indian Cities</div>
+              <div id="dropdownCitiesList"></div>
+            </div>
+          </div>
+        </section>
 
-            <!-- Search Bar: Pill Input with Autocomplete Dropdown -->
-            <section class="search-container">
-              <div class="search-pill">
-                <span class="search-icon">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </span>
-                <input 
-                  type="text" 
-                  class="search-input" 
-                  id="citySearchInput" 
-                  placeholder="Search City..." 
-                  autocomplete="off" 
-                  spellcheck="false"
-                >
-                <button class="search-clear-btn" id="searchClearBtn" title="Clear input">✕</button>
-              </div>
+        <!-- Core Dashboard Grid (Auto-fits without scrolling) -->
+        <section class="dashboard-core-grid">
 
-              <!-- Instant City Suggestions & Report Finder Dropdown -->
-              <div class="search-dropdown" id="searchDropdown">
-                <div class="dropdown-section-title">Major Indian Cities</div>
-                <div id="dropdownCitiesList"></div>
-              </div>
-            </section>
-
-            <!-- Three Quick City Cards (Row of 3 horizontal cards) -->
-            <!-- Matches screenshot: Mumbai (Partly Cloudy), Delhi (Thunderstorms), Bangalore (Windy) -->
-            <section class="quick-cities-grid">
+          <!-- Left Column: Quick Monitored Cities -->
+          <div class="quick-cities-panel">
+            <div class="panel-heading-tag">Featured Cities</div>
+            <div class="quick-cities-grid">
               
               <!-- Card 1: Mumbai -->
               <div class="quick-city-card" data-city="Mumbai" id="cardMumbai">
                 <div class="quick-card-icon">
-                  <!-- Sun behind Cloud -->
                   <svg viewBox="0 0 64 64" fill="none">
                     <circle cx="26" cy="24" r="14" fill="#FBBF24"/>
                     <path d="M12 24H4M26 10V2M36 14L42 8M16 14L10 8" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
@@ -151,46 +131,52 @@
                     <path d="M24 44H50C54.4 44 58 40.4 58 36C58 31.8 54.8 28.4 50.8 28.1C49.4 22.8 44.6 19 39 19C32.4 19 27 23.8 25.9 30.1C24.8 29.8 23.6 29.5 22.2 29.5C17.3 29.5 13.4 33.4 13.4 38.3C13.4 42.3 16.2 44 19.8 44H24Z" fill="#DBEAFE"/>
                   </svg>
                 </div>
-                <h3 class="quick-card-city">Mumbai</h3>
-                <span class="quick-card-condition" id="mumbaiQuickText">30°C, Partly Cloudy</span>
+                <div class="quick-card-info">
+                  <h3 class="quick-card-city">Mumbai</h3>
+                  <span class="quick-card-condition" id="mumbaiQuickText">30°C, Partly Cloudy</span>
+                </div>
               </div>
 
               <!-- Card 2: Delhi -->
               <div class="quick-city-card" data-city="Delhi" id="cardDelhi">
                 <div class="quick-card-icon">
-                  <!-- Cloud with Lightning -->
                   <svg viewBox="0 0 64 64" fill="none">
                     <path d="M20 40H48C53.5 40 58 35.5 58 30C58 24.8 54 20.5 49 20.1C47.2 13.5 41.2 8.8 34 8.8C25.8 8.8 19 14.8 17.6 22.7C16.2 22.3 14.7 22 13 22C6.9 22 2 26.9 2 33C2 38 5.5 40 10 40H20Z" fill="#60A5FA"/>
                     <path d="M30 32L23 44H32L28 58L43 40H33L38 32H30Z" fill="#FACC15" stroke="#EAB308" stroke-width="1.5" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <h3 class="quick-card-city">Delhi</h3>
-                <span class="quick-card-condition" id="delhiQuickText">Thunderstorms</span>
+                <div class="quick-card-info">
+                  <h3 class="quick-card-city">Delhi</h3>
+                  <span class="quick-card-condition" id="delhiQuickText">Thunderstorms</span>
+                </div>
               </div>
 
               <!-- Card 3: Bangalore -->
               <div class="quick-city-card" data-city="Bangalore" id="cardBangalore">
                 <div class="quick-card-icon">
-                  <!-- Wind Swirl Lines -->
                   <svg viewBox="0 0 64 64" fill="none">
                     <path d="M8 22H38C42 22 46 19 46 15C46 11 42 8 38 8C34 8 32 11 32 13" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round"/>
                     <path d="M4 32H48C52.4 32 56 29 56 25C56 21 52.4 18 48 18C43.6 18 41 21 41 23" stroke="#0284C7" stroke-width="3.5" stroke-linecap="round"/>
                     <path d="M12 42H32C36 42 39 45 39 48.5C39 52 36 55 32 55C28 55 26 52 26 50" stroke="#60A5FA" stroke-width="3.5" stroke-linecap="round"/>
                   </svg>
                 </div>
-                <h3 class="quick-card-city">Bangalore</h3>
-                <span class="quick-card-condition" id="bangaloreQuickText">Windy</span>
+                <div class="quick-card-info">
+                  <h3 class="quick-card-city">Bangalore</h3>
+                  <span class="quick-card-condition" id="bangaloreQuickText">Windy</span>
+                </div>
               </div>
 
-            </section>
+            </div>
+          </div>
 
-            <!-- Main Current Location Weather Card -->
-            <!-- Matches screenshot: Current Location: Hyderabad, 32° Clear Sky, 25° ⚡, 25° 🌧️, Tabs -->
+          <!-- Center Column: Main Current Location Weather Card -->
+          <div class="hero-weather-panel">
             <section class="current-weather-card" id="currentWeatherCard">
               
               <!-- Card Header Row -->
               <div class="card-header-row">
                 <div class="location-title-wrap">
+                  <span class="location-pin-icon">📍</span>
                   <span class="location-title" id="activeCityTitle">Current Location: Hyderabad</span>
                 </div>
                 <button class="card-menu-btn" id="kebabMenuBtn" title="More options">⋮</button>
@@ -219,7 +205,6 @@
                   <div class="hero-sun-icon" id="heroWeatherIcon">
                     <svg viewBox="0 0 64 64" fill="none">
                       <circle cx="32" cy="32" r="16" fill="url(#sunGrad)"/>
-                      <!-- Radiant Sun Rays -->
                       <g stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round">
                         <line x1="32" y1="4" x2="32" y2="10" />
                         <line x1="32" y1="54" x2="32" y2="60" />
@@ -264,7 +249,6 @@
               </div>
 
               <!-- Segmented Forecast Time Tabs -->
-              <!-- Replicates: ☀️ Today 35° / Tomorrow / Fri -->
               <div class="forecast-tabs-row">
                 <button class="tab-pill active" id="tabToday">
                   <span class="tab-sun-icon">☀️</span>
@@ -279,134 +263,130 @@
                 </button>
               </div>
 
-              <!-- City Weather Report Trigger & Detail Toggle -->
+              <!-- City Weather Report Action Trigger -->
               <div class="city-report-action-wrap">
                 <button class="report-trigger-btn" id="generateCityReportBtn">
                   <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                   View City Weather Report
                 </button>
-                <button class="metrics-expand-toggle-btn" id="metricsToggleBtn">
-                  <span id="metricsToggleText">Metrics</span>
-                  <span id="metricsToggleArrow">▾</span>
-                </button>
-              </div>
-
-              <!-- Expandable Detailed Meteorological Metrics Drawer -->
-              <div class="metrics-drawer" id="metricsDrawer">
-                <div class="metrics-grid">
-                  <div class="metric-cell">
-                    <div class="label">Humidity</div>
-                    <div class="val" id="metricHumidity">58%</div>
-                  </div>
-                  <div class="metric-cell">
-                    <div class="label">Wind Speed</div>
-                    <div class="val" id="metricWind">14 km/h</div>
-                  </div>
-                  <div class="metric-cell">
-                    <div class="label">Pressure</div>
-                    <div class="val" id="metricPressure">1013 hPa</div>
-                  </div>
-                  <div class="metric-cell">
-                    <div class="label">Visibility</div>
-                    <div class="val" id="metricVisibility">10 km</div>
-                  </div>
-                  <div class="metric-cell">
-                    <div class="label">UV Index</div>
-                    <div class="val" id="metricUV">7 (High)</div>
-                  </div>
-                  <div class="metric-cell">
-                    <div class="label">Air Quality</div>
-                    <div class="val" id="metricAQI">85 (Good)</div>
-                  </div>
-                </div>
-
-                <!-- 24-Hour Diurnal Progression Ribbon -->
-                <div class="hourly-ribbon" id="hourlyRibbon"></div>
               </div>
 
             </section>
-
-            <!-- City Skyline Silhouette Graphic -->
-            <!-- Matches the distinct dusky cityscape silhouette against the sunset glow -->
-            <div class="city-skyline-wrapper" aria-hidden="true">
-              <svg class="city-skyline-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
-                <!-- Detailed Architectural Silhouette (monuments, towers, domes, high-rises) -->
-                <path d="
-                  M0,120 
-                  L0,98 
-                  L18,98 L18,74 L25,74 L25,98 
-                  L38,98 L38,82 L52,82 L52,98 
-                  L64,98 L64,65 L76,65 L76,98 
-                  L90,98 L90,88 L102,88 L102,98 
-                  L112,98 L112,50 L120,44 L128,50 L128,98 
-                  L142,98 L142,80 L158,80 L158,98 
-                  L170,98 L170,68 L182,68 L182,98 
-                  L194,98 L194,54 L204,42 L208,28 L212,42 L222,54 L222,98 
-                  L236,98 L236,78 L250,78 L250,98 
-                  L262,98 L262,60 L274,60 L274,98 
-                  L286,98 L286,70 L300,70 L300,98 
-                  L312,98 L312,48 L324,38 L336,48 L336,98 
-                  L350,98 L350,84 L365,84 L365,98 
-                  L378,98 L378,66 L392,66 L392,98 
-                  L406,98 L406,78 L420,78 L420,98 
-                  L434,98 L434,58 L446,58 L446,98 
-                  L458,98 L458,72 L474,72 L474,98 
-                  L488,98 L488,82 L500,82 L500,120 Z
-                " />
-              </svg>
-            </div>
-
           </div>
 
-          <!-- Bottom Navigation Bar Dock (Replicating exact 5 buttons from screenshot) -->
-          <!-- Home | Map | Moms (Report/Docs) | Alerts | Settings -->
-          <nav class="bottom-nav-dock" id="bottomNavDock">
-            
-            <!-- 1. Home -->
-            <button class="nav-item-btn active" id="navHome" data-tab="home" title="Weather Dashboard">
-              <span class="nav-icon">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              </span>
-              <span class="nav-label">Home</span>
-            </button>
+          <!-- Right Column: Detailed Live Meteorological Parameters & 24h Hourly Ribbon -->
+          <div class="metrics-panel">
+            <div class="panel-heading-tag">Station Parameters</div>
+            <div class="metrics-grid">
+              <div class="metric-cell">
+                <div class="label">Humidity</div>
+                <div class="val" id="metricHumidity">58%</div>
+              </div>
+              <div class="metric-cell">
+                <div class="label">Wind Speed</div>
+                <div class="val" id="metricWind">14 km/h</div>
+              </div>
+              <div class="metric-cell">
+                <div class="label">Pressure</div>
+                <div class="val" id="metricPressure">1013 hPa</div>
+              </div>
+              <div class="metric-cell">
+                <div class="label">Visibility</div>
+                <div class="val" id="metricVisibility">10 km</div>
+              </div>
+              <div class="metric-cell">
+                <div class="label">UV Index</div>
+                <div class="val" id="metricUV">7 (High)</div>
+              </div>
+              <div class="metric-cell">
+                <div class="label">Air Quality</div>
+                <div class="val" id="metricAQI">85 (Good)</div>
+              </div>
+            </div>
 
-            <!-- 2. Map -->
-            <button class="nav-item-btn" id="navMap" data-tab="map" title="Weather Radar Map">
-              <span class="nav-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-              </span>
-              <span class="nav-label">Map</span>
-            </button>
+            <!-- 24-Hour Diurnal Progression Ribbon -->
+            <div class="hourly-ribbon-wrap">
+              <div class="panel-heading-tag" style="margin-top: 8px;">24h Forecast Progression</div>
+              <div class="hourly-ribbon" id="hourlyRibbon"></div>
+            </div>
+          </div>
 
-            <!-- 3. Moms / Report (Book Icon from screenshot - Dedicated to Project Synopsis & City Reports) -->
-            <button class="nav-item-btn" id="navReport" data-tab="report" title="City-Wise Weather Reporting System Report">
-              <span class="nav-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-              </span>
-              <span class="nav-label">Report</span>
-            </button>
+        </section>
 
-            <!-- 4. Alerts -->
-            <button class="nav-item-btn" id="navAlerts" data-tab="alerts" title="Weather Alerts & Warnings">
-              <span class="nav-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-              </span>
-              <span class="nav-label">Alerts</span>
-              <span class="alert-dot" id="navAlertDot"></span>
-            </button>
-
-            <!-- 5. Settings -->
-            <button class="nav-item-btn" id="navSettings" data-tab="settings" title="System Settings">
-              <span class="nav-icon">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-              </span>
-              <span class="nav-label">Settings</span>
-            </button>
-
-          </nav>
-
-        </div>
       </div>
+
+      <!-- City Skyline Silhouette Graphic -->
+      <div class="city-skyline-wrapper" aria-hidden="true">
+        <svg class="city-skyline-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
+          <path d="
+            M0,120 
+            L0,98 
+            L18,98 L18,74 L25,74 L25,98 
+            L38,98 L38,82 L52,82 L52,98 
+            L64,98 L64,65 L76,65 L76,98 
+            L90,98 L90,88 L102,88 L102,98 
+            L112,98 L112,50 L120,44 L128,50 L128,98 
+            L142,98 L142,80 L158,80 L158,98 
+            L170,98 L170,68 L182,68 L182,98 
+            L194,98 L194,54 L204,42 L208,28 L212,42 L222,54 L222,98 
+            L236,98 L236,78 L250,78 L250,98 
+            L262,98 L262,60 L274,60 L274,98 
+            L286,98 L286,70 L300,70 L300,98 
+            L312,98 L312,48 L324,38 L336,48 L336,98 
+            L350,98 L350,84 L365,84 L365,98 
+            L378,98 L378,66 L392,66 L392,98 
+            L406,98 L406,78 L420,78 L420,98 
+            L434,98 L434,58 L446,58 L446,98 
+            L458,98 L458,72 L474,72 L474,98 
+            L488,98 L488,82 L500,82 L500,120 Z
+          " />
+        </svg>
+      </div>
+
+      <!-- Bottom Navigation Bar Dock (Centered floating dock) -->
+      <nav class="bottom-nav-dock" id="bottomNavDock">
+        <!-- 1. Home -->
+        <button class="nav-item-btn active" id="navHome" data-tab="home" title="Weather Dashboard">
+          <span class="nav-icon">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </span>
+          <span class="nav-label">Home</span>
+        </button>
+
+        <!-- 2. Map -->
+        <button class="nav-item-btn" id="navMap" data-tab="map" title="Weather Radar Map">
+          <span class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          </span>
+          <span class="nav-label">Map</span>
+        </button>
+
+        <!-- 3. Report -->
+        <button class="nav-item-btn" id="navReport" data-tab="report" title="City Weather Reports Directory">
+          <span class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </span>
+          <span class="nav-label">Reports</span>
+        </button>
+
+        <!-- 4. Alerts -->
+        <button class="nav-item-btn" id="navAlerts" data-tab="alerts" title="Weather Alerts & Warnings">
+          <span class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </span>
+          <span class="nav-label">Alerts</span>
+          <span class="alert-dot" id="navAlertDot"></span>
+        </button>
+
+        <!-- 5. Settings -->
+        <button class="nav-item-btn" id="navSettings" data-tab="settings" title="System Settings">
+          <span class="nav-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span class="nav-label">Settings</span>
+        </button>
+      </nav>
+
     </div>
   </main>
 

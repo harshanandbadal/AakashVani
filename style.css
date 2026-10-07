@@ -65,13 +65,18 @@
 }
 
 html, body {
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
   font-family: var(--font-main);
   background-color: #0b1324;
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Ambient workspace background for desktop showcase */
@@ -84,14 +89,14 @@ body.workspace-bg {
    Top Showcase Navigation Bar (Desktop / Workbench Header)
    ========================================================================== */
 .showcase-header {
-  position: sticky;
-  top: 0;
+  flex: 0 0 50px;
+  height: 50px;
   z-index: 1000;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 10px 24px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -196,133 +201,19 @@ body.workspace-bg {
   color: #ffffff;
 }
 
-.mode-toggle {
-  display: inline-flex;
-  padding: 3px;
-  background: rgba(2, 6, 23, 0.7);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mode-btn {
-  padding: 5px 10px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #94a3b8;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all var(--trans-fast);
-}
-
-.mode-btn.active {
-  background: #2563eb;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
 /* ==========================================================================
-   App Main Layout & Container
+   Main Full-Screen Auto-Fit Dashboard Container (Zero Scroll)
    ========================================================================== */
-.app-container {
+.dashboard-container {
+  flex: 1 1 auto;
+  height: calc(100vh - 50px);
+  min-height: 0;
+  padding: 10px 20px 14px;
   display: flex;
+  align-items: stretch;
   justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 60px);
-  padding: 24px 16px 40px;
-  transition: all var(--trans-smooth);
-}
-
-/* View Mode: Phone Mockup Container (Recreating handheld phone experience) */
-.phone-mockup-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1200px;
-}
-
-/* Outer phone frame with curved edges and bezel */
-.smartphone-frame {
-  position: relative;
-  width: 412px;
-  height: 870px;
-  background: #111418;
-  border-radius: 52px;
-  padding: 12px;
-  box-shadow: 
-    0 0 0 2px #334155,
-    0 25px 60px -15px rgba(0, 0, 0, 0.8),
-    0 10px 30px rgba(0, 0, 0, 0.5),
-    inset 0 0 4px 2px rgba(255, 255, 255, 0.15);
-  transition: all var(--trans-smooth);
   overflow: hidden;
-}
-
-/* Fullscreen / Wide mode layout overrides */
-.app-container.expanded .smartphone-frame {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  min-height: 880px;
-  border-radius: 28px;
-  padding: 0;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-}
-
-.app-container.expanded .phone-speaker,
-.app-container.expanded .phone-camera-hole {
-  display: none;
-}
-
-/* Screen bezel cutouts (Speaker & punch-hole camera) */
-.phone-speaker {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4.5px;
-  background: #27272a;
-  border-radius: 4px;
-  z-index: 100;
-}
-
-.phone-camera-hole {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 11px;
-  height: 11px;
-  background: #09090b;
-  border-radius: 50%;
-  border: 1px solid #27272a;
-  z-index: 100;
-  box-shadow: inset 0 0 2px #38bdf8;
-}
-
-/* Side volume / power buttons visual hints */
-.smartphone-frame::before {
-  content: '';
-  position: absolute;
-  top: 140px;
-  left: -3px;
-  width: 3px;
-  height: 50px;
-  background: #334155;
-  border-radius: 2px 0 0 2px;
-}
-.smartphone-frame::after {
-  content: '';
-  position: absolute;
-  top: 210px;
-  left: -3px;
-  width: 3px;
-  height: 50px;
-  background: #334155;
-  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
 }
 
 /* ==========================================================================
@@ -331,8 +222,9 @@ body.workspace-bg {
 .screen-surface {
   position: relative;
   width: 100%;
+  max-width: 1400px;
   height: 100%;
-  border-radius: 42px;
+  border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -346,11 +238,7 @@ body.workspace-bg {
     #d16053 96%,
     #bf4e48 100%
   );
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.app-container.expanded .screen-surface {
-  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 /* Floating cloud decorative layers */
@@ -369,7 +257,7 @@ body.workspace-bg {
 }
 
 .cloud-svg-bg.cloud-1 {
-  top: 120px;
+  top: 70px;
   left: -20px;
   width: 140px;
   opacity: 0.65;
@@ -377,7 +265,7 @@ body.workspace-bg {
 }
 
 .cloud-svg-bg.cloud-2 {
-  top: 220px;
+  top: 130px;
   right: -30px;
   width: 180px;
   opacity: 0.55;
@@ -385,8 +273,8 @@ body.workspace-bg {
 }
 
 .cloud-svg-bg.cloud-3 {
-  top: 310px;
-  left: 10px;
+  top: 200px;
+  left: 20px;
   width: 110px;
   opacity: 0.45;
   animation: floatCloud 20s ease-in-out infinite alternate;
@@ -398,82 +286,43 @@ body.workspace-bg {
 }
 
 /* ==========================================================================
-   Phone Status Bar (9:41, Signal, Wifi, Battery)
+   Dashboard Auto-Fit Layout
    ========================================================================== */
-.status-bar {
-  position: relative;
-  z-index: 20;
-  height: 38px;
-  padding: 0 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.status-time {
-  font-family: var(--font-display);
-  font-weight: 700;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-}
-
-.status-icons svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-
-/* ==========================================================================
-   Main Scrollable Phone Content Viewport
-   ========================================================================== */
-.phone-viewport-content {
+.dashboard-layout {
   position: relative;
   z-index: 10;
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 4px 18px 85px; /* bottom space for nav dock */
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  padding: 12px 24px 62px; /* Bottom space for floating nav dock */
+  gap: 12px;
+  overflow: hidden;
 }
 
-.phone-viewport-content::-webkit-scrollbar {
-  width: 4px;
-}
-.phone-viewport-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-}
-
-/* ==========================================================================
-   AakashVani Brand Header (Cloud Emblem + Title + Subtitle)
-   ========================================================================== */
-.weather-brand-header {
-  text-align: center;
-  padding: 6px 0 2px;
+/* Top Section: Brand Header & Search Bar */
+.dashboard-top-section {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.weather-brand-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
   color: #ffffff;
 }
 
 .brand-cloud-emblem {
-  width: 78px;
-  height: 52px;
-  margin-bottom: 2px;
-  filter: drop-shadow(0 6px 14px rgba(255, 255, 255, 0.45));
+  width: 50px;
+  height: 35px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.45));
   transition: transform var(--trans-normal);
 }
 
@@ -483,30 +332,94 @@ body.workspace-bg {
 
 .brand-app-title {
   font-family: var(--font-display);
-  font-size: 1.85rem;
+  font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 .brand-app-subtitle {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.01em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
   margin-top: 1px;
 }
 
 /* ==========================================================================
-   Search Bar (Exact Pill Shape with Quick Suggestions)
+   Core Dashboard Grid (3 Columns Auto-Fitting Screen Height)
+   ========================================================================== */
+.dashboard-core-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 270px 1.25fr 360px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.panel-heading-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quick-cities-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.hero-weather-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.metrics-panel {
+  background: var(--card-bg);
+  border-radius: 22px;
+  padding: 14px 16px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 0;
+}
+
+.metrics-panel .panel-heading-tag {
+  color: #475569;
+  text-shadow: none;
+}
+
+.hourly-ribbon-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+/* ==========================================================================
+   Search Bar (Pill Shape in Top Section)
    ========================================================================== */
 .search-container {
   position: relative;
-  width: 100%;
-  margin-top: 2px;
+  flex: 1;
+  max-width: 520px;
   z-index: 30;
 }
 
@@ -662,46 +575,50 @@ body.workspace-bg {
    Replicating Mumbai (Partly Cloudy), Delhi (Thunderstorms), Bangalore (Windy)
    ========================================================================== */
 .quick-cities-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
-  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  justify-content: space-between;
 }
 
 .quick-city-card {
   background: var(--card-bg);
   border-radius: 18px;
-  padding: 12px 6px 10px;
+  padding: 12px 14px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
+  text-align: left;
+  gap: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.7);
   cursor: pointer;
   transition: all var(--trans-normal);
-  position: relative;
-  overflow: hidden;
+  flex: 1;
 }
 
 .quick-city-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
   background: #ffffff;
 }
 
 .quick-city-card.active-city {
-  border: 1.5px solid #38bdf8;
-  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.22);
+  border: 2px solid #0284c7;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.22);
 }
 
 .quick-card-icon {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .quick-card-icon svg {
@@ -709,9 +626,15 @@ body.workspace-bg {
   height: 100%;
 }
 
+.quick-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .quick-card-city {
   font-family: var(--font-display);
-  font-size: 0.86rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 2px;
@@ -719,14 +642,14 @@ body.workspace-bg {
 }
 
 .quick-card-condition {
-  font-size: 0.64rem;
+  font-size: 0.72rem;
   font-weight: 500;
   color: #64748b;
   line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 95%;
+  max-width: 100%;
 }
 
 /* ==========================================================================
@@ -736,10 +659,14 @@ body.workspace-bg {
 .current-weather-card {
   background: var(--card-bg);
   border-radius: 22px;
-  padding: 16px 18px;
+  padding: 16px 20px;
   box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   transition: all var(--trans-normal);
 }
 
@@ -1096,12 +1023,13 @@ body.workspace-bg {
    Resting against the warm sunset gradient, matching the screenshot
    ========================================================================== */
 .city-skyline-wrapper {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  margin-top: auto;
+  height: 65px;
   pointer-events: none;
   z-index: 5;
-  height: 90px;
 }
 
 .city-skyline-svg {
@@ -1111,6 +1039,7 @@ body.workspace-bg {
   width: 100%;
   height: 100%;
   fill: var(--skyline-color);
+  opacity: 0.85;
   filter: drop-shadow(0 -4px 10px rgba(143, 79, 110, 0.3));
 }
 
@@ -1120,20 +1049,23 @@ body.workspace-bg {
    ========================================================================== */
 .bottom-nav-dock {
   position: absolute;
-  bottom: 12px;
-  left: 18px;
-  right: 18px;
-  height: 58px;
-  background: rgba(255, 255, 255, 0.94);
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 360px;
+  max-width: 440px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   z-index: 30;
 }
 
@@ -1746,3 +1678,83 @@ body.workspace-bg {
     padding: 0 !important;
   }
 }
+
+/* ==========================================================================
+   Zero-Scroll Auto-Fit Screen Height Media Queries
+   ========================================================================== */
+@media (max-height: 820px) {
+  .dashboard-container {
+    padding: 6px 14px 10px;
+  }
+  .dashboard-layout {
+    padding: 8px 18px 56px;
+    gap: 8px;
+  }
+  .weather-brand-header .brand-app-title {
+    font-size: 1.35rem;
+  }
+  .brand-cloud-emblem {
+    width: 42px;
+    height: 30px;
+  }
+  .search-pill {
+    height: 38px;
+  }
+  .hero-temperature {
+    font-size: 2.6rem;
+  }
+  .hero-sun-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .quick-city-card {
+    padding: 8px 12px;
+    border-radius: 14px;
+  }
+  .quick-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .metric-cell {
+    padding: 5px 4px;
+  }
+  .metric-cell .val {
+    font-size: 0.82rem;
+  }
+  .hourly-item {
+    padding: 4px 2px;
+  }
+  .city-skyline-wrapper {
+    height: 50px;
+  }
+  .bottom-nav-dock {
+    height: 44px;
+    bottom: 6px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .dashboard-core-grid {
+    grid-template-columns: 240px 1.15fr 310px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  html, body {
+    height: auto;
+    overflow-y: auto;
+  }
+  .dashboard-container {
+    height: auto;
+    overflow-y: auto;
+  }
+  .dashboard-layout {
+    overflow-y: auto;
+    padding-bottom: 74px;
+  }
+  .dashboard-core-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

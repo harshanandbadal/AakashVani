@@ -69,8 +69,6 @@ const openDirectoryBtn = document.getElementById('openDirectoryBtn');
 const unitToggleBtn = document.getElementById('unitToggleBtn');
 const unitDisplay = document.getElementById('unitDisplay');
 
-const modePhoneBtn = document.getElementById('modePhoneBtn');
-const modeExpandedBtn = document.getElementById('modeExpandedBtn');
 const appMainContainer = document.getElementById('appMainContainer');
 
 // Quick cards
@@ -905,18 +903,6 @@ function setupHeaderActions() {
     renderCityWeather(state.activeCity);
   });
 
-  // View Mode Switcher
-  modePhoneBtn?.addEventListener('click', () => {
-    modePhoneBtn.classList.add('active');
-    modeExpandedBtn.classList.remove('active');
-    appMainContainer.classList.remove('expanded');
-  });
-
-  modeExpandedBtn?.addEventListener('click', () => {
-    modeExpandedBtn.classList.add('active');
-    modePhoneBtn.classList.remove('active');
-    appMainContainer.classList.add('expanded');
-  });
 }
 
 // =============================================================================
