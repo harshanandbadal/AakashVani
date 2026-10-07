@@ -879,9 +879,64 @@ function setupModalClosers() {
 // Showcase Header Actions & View Mode Toggle
 // =============================================================================
 function setupHeaderActions() {
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const showcaseActions = document.getElementById('showcaseActions');
+  const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+
+  function toggleMobileMenu(open) {
+    const shouldOpen = open !== undefined ? open : !showcaseActions?.classList.contains('open');
+    showcaseActions?.classList.toggle('open', shouldOpen);
+    mobileMenuBtn?.classList.toggle('active', shouldOpen);
+    mobileMenuBtn?.setAttribute('aria-expanded', String(shouldOpen));
+    mobileMenuBackdrop?.classList.toggle('active', shouldOpen);
+  }
+
+  // 3-Line Hamburger Menu Toggle Button
+  mobileMenuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMobileMenu();
+  });
+
+  // Close mobile menu when clicking outside / on backdrop
+  mobileMenuBackdrop?.addEventListener('click', () => {
+    toggleMobileMenu(false);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (showcaseActions?.classList.contains('open') && 
+        !showcaseActions.contains(e.target) && 
+        !mobileMenuBtn?.contains(e.target)) {
+      toggleMobileMenu(false);
+    }
+  });
+
+  // Close mobile menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && showcaseActions?.classList.contains('open')) {
+      toggleMobileMenu(false);
+    }
+  });
+
+  // Mobile menu shortcuts
+  document.getElementById('mobileLinkMap')?.addEventListener('click', () => {
+    toggleMobileMenu(false);
+    mapModal?.classList.add('open');
+  });
+
+  document.getElementById('mobileLinkAlerts')?.addEventListener('click', () => {
+    toggleMobileMenu(false);
+    alertsModal?.classList.add('open');
+  });
+
+  document.getElementById('mobileLinkSettings')?.addEventListener('click', () => {
+    toggleMobileMenu(false);
+    settingsModal?.classList.add('open');
+  });
+
   // Find City Reports button
   openDirectoryBtn?.addEventListener('click', () => {
-    directoryModal.classList.add('open');
+    toggleMobileMenu(false);
+    directoryModal?.classList.add('open');
   });
 
   // Unit Toggle
@@ -902,7 +957,6 @@ function setupHeaderActions() {
     state.useLiveAPI = e.target.value === 'live';
     renderCityWeather(state.activeCity);
   });
-
 }
 
 // =============================================================================

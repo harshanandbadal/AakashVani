@@ -89,6 +89,7 @@ body.workspace-bg {
    Top Showcase Navigation Bar (Desktop / Workbench Header)
    ========================================================================== */
 .showcase-header {
+  position: relative;
   flex: 0 0 50px;
   height: 50px;
   z-index: 1000;
@@ -153,6 +154,80 @@ body.workspace-bg {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* 3-Line Hamburger Menu Toggle Button (Desktop: hidden) */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--trans-fast);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.hamburger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease;
+  transform-origin: center;
+}
+
+/* Animate 3 lines into an X when active */
+.mobile-menu-btn.active .hamburger-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.mobile-menu-btn.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.mobile-menu-btn.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.unit-btn-label {
+  display: none;
+}
+
+.mobile-nav-links {
+  display: none;
+}
+
+.mobile-menu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity var(--trans-fast);
+}
+
+.mobile-menu-backdrop.active {
+  display: block;
+  opacity: 1;
 }
 
 .action-btn {
@@ -1755,6 +1830,176 @@ body.workspace-bg {
   }
   .dashboard-core-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Showcase Header Phone Autofit & 3-Line Menu Drawer (< 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .showcase-header {
+    padding: 0 14px;
+    height: 48px;
+    flex: 0 0 48px;
+  }
+
+  .brand-badge {
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .brand-badge .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .brand-info {
+    min-width: 0;
+  }
+
+  .brand-info h1 {
+    font-size: 1.05rem;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-info .badge-tag {
+    display: none;
+  }
+
+  .brand-info p {
+    display: none;
+  }
+
+  /* Show 3-line hamburger menu button on phone */
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  /* Hide showcase actions by default, expand as slide-down drawer when 3-line menu toggled */
+  .showcase-actions {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.4);
+    padding: 14px 16px 18px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    z-index: 1050;
+    animation: mobileMenuSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .showcase-actions.open {
+    display: flex;
+  }
+
+  @keyframes mobileMenuSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .showcase-actions .action-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .unit-btn-label {
+    display: inline;
+    margin-right: 4px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-nav-link-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    color: #e2e8f0;
+    font-family: var(--font-main);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--trans-fast);
+  }
+
+  .mobile-nav-link-btn:hover,
+  .mobile-nav-link-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.3);
+  }
+
+  .mobile-nav-link-btn svg {
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+
+  /* Dashboard mobile layout autofit enhancements */
+  .dashboard-top-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .weather-brand-header {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  .dashboard-container {
+    padding: 6px 8px 12px;
+  }
+
+  .dashboard-layout {
+    padding: 10px 12px 76px;
+  }
+
+  .bottom-nav-dock {
+    min-width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
+    transform: none;
   }
 }
 
