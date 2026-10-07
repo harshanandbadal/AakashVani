@@ -1,5 +1,7 @@
 # AakashVani: City-Wise Weather Reporting System 🌤️
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-aakashvani--sigma.vercel.app-000000?style=flat&logo=vercel)](https://aakashvani-sigma.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-harshanandbadal%2FAakashVani-181717?style=flat&logo=github)](https://github.com/harshanandbadal/AakashVani)
 [![Platform](https://img.shields.io/badge/Platform-Web-blue.svg)](https://developer.mozilla.org/en-US/docs/Web)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
@@ -7,6 +9,13 @@
 **AakashVani** (*"Voice from the Sky"*) is a modern, responsive web-based weather reporting portal and decision-support system. It delivers real-time meteorological observations, short- and long-range forecasts, and comprehensive city-level weather dossiers across major cities in India.
 
 The application features a modern mobile interface framed inside a smartphone showcase on desktop, with seamless expansion to a full-width dashboard.
+
+---
+
+## 🔗 Quick Links
+
+* 🌐 **Live Web Application**: [https://aakashvani-sigma.vercel.app/](https://aakashvani-sigma.vercel.app/)
+* 📦 **GitHub Repository**: [https://github.com/harshanandbadal/AakashVani](https://github.com/harshanandbadal/AakashVani)
 
 ---
 
